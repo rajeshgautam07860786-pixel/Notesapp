@@ -20,6 +20,17 @@ function deleteNote(index) {
     localStorage.setItem("notes", JSON.stringify(notes));
     showNotes();
 }
+function editNote(index) {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    const updatedNote = prompt("Edit your note:", notes[index]);
+
+    if (updatedNote !== null && updatedNote.trim() !== "") {
+        notes[index] = updatedNote;
+        localStorage.setItem("notes", JSON.stringify(notes));
+        showNotes();
+    }
+}
 
 function showNotes() {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -29,7 +40,8 @@ function showNotes() {
         output += `
         <div class="note">
             <p>${n}</p>
-            <button onclick="deleteNote(${index})">Delete</button>
+            <button onclick="editNote(${index})">Edit</button>
+<button onclick="deleteNote(${index})">Delete</button>
         </div>
         `;
     });
