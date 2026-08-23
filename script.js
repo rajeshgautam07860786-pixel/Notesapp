@@ -14,12 +14,24 @@ function saveNote() {
     showNotes();
 }
 
+function deleteNote(index) {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    notes.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    showNotes();
+}
+
 function showNotes() {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     let output = "";
 
-    notes.forEach((n) => {
-        output += `<div class="note">${n}</div>`;
+    notes.forEach((n, index) => {
+        output += `
+        <div class="note">
+            <p>${n}</p>
+            <button onclick="deleteNote(${index})">Delete</button>
+        </div>
+        `;
     });
 
     document.getElementById("notes").innerHTML = output;
