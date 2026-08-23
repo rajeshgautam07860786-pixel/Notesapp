@@ -7,7 +7,10 @@ function saveNote() {
     }
 
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
-    notes.push(note);
+    notes.push({
+    text: note,
+    date: new Date().toLocaleString()
+});
     localStorage.setItem("notes", JSON.stringify(notes));
 
     document.getElementById("note").value = "";
@@ -23,10 +26,11 @@ function deleteNote(index) {
 function editNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-    const updatedNote = prompt("Edit your note:", notes[index]);
+    const updatedNote = prompt("Edit your note:", notes[index]. text);
 
     if (updatedNote !== null && updatedNote.trim() !== "") {
-        notes[index] = updatedNote;
+        notes[index].text = updatedNote;
+notes[index].date = new Date().toLocaleString();
         localStorage.setItem("notes", JSON.stringify(notes));
         showNotes();
     }
@@ -39,7 +43,8 @@ function showNotes() {
     notes.forEach((n, index) => {
         output += `
         <div class="note">
-            <p>${n}</p>
+             <p>${n.text}</p>
+<small>${n.date}</small>
             <button onclick="editNote(${index})">Edit</button>
 <button onclick="deleteNote(${index})">Delete</button>
         </div>
