@@ -55,3 +55,18 @@ function showNotes() {
 }
 
 showNotes();
+
+function searchNotes() {
+    const search = document.getElementById("search").value.toLowerCase();
+    const notes = document.querySelectorAll(".note");
+
+    notes.forEach(note => {
+        const text = note.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            note.style.display = "block";
+        } else {
+            note.style.display = "none";
+        }
+    });
+}
