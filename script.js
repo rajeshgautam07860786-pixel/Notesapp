@@ -5,13 +5,7 @@ function saveNote() {
         alert("Please write a note!");
         return;
     }
-    function deleteAllNotes() {
-    if (confirm("Are you sure you want to delete all notes?")) {
-        localStorage.removeItem("notes");
-        showNotes();
-    }
-}
-
+    
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     notes.push({
     text: note,
@@ -23,15 +17,25 @@ function saveNote() {
     showNotes();
 }
 
+
 function deleteNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     notes.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notes));
     showNotes();
 }
+
+function deleteAllNotes() {
+    if (confirm("Are you sure you want to delete all notes?")) {
+        localStorage.removeItem("notes");
+        showNotes();
+    }
+}
+
 function editNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
+    
     const updatedNote = prompt("Edit your note:", notes[index]. text);
 
     if (updatedNote !== null && updatedNote.trim() !== "") {
@@ -41,6 +45,7 @@ notes[index].date = new Date().toLocaleString();
         showNotes();
     }
 }
+
 
 function showNotes() {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
