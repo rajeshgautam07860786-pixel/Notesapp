@@ -5,6 +5,12 @@ function saveNote() {
         alert("Please write a note!");
         return;
     }
+    function deleteAllNotes() {
+    if (confirm("Are you sure you want to delete all notes?")) {
+        localStorage.removeItem("notes");
+        showNotes();
+    }
+}
 
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     notes.push({
