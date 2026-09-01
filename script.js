@@ -31,7 +31,22 @@ function deleteAllNotes() {
         showNotes();
     }
 }
+function undoDelete() {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    let trash = JSON.parse(localStorage.getItem("trash")) || [];
 
+    if (trash.length === 0) {
+        alert("Trash is empty!");
+        return;
+    }
+
+    notes.push(trash.pop());
+
+    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("trash", JSON.stringify(trash));
+
+    showNotes();
+}
 function editNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
