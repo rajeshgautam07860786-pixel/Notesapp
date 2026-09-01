@@ -18,15 +18,28 @@ function saveNote() {
 }
 
 
+let trash = JSON.parse(localStorage.getItem("trash")) || [];
+
 function deleteNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    trash.push(notes[index]);
+    localStorage.setItem("trash", JSON.stringify(trash));
+
     notes.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notes));
+
     showNotes();
 }
 
 function deleteAllNotes() {
     if (confirm("Are you sure you want to delete all notes?")) {
+
+        let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+        trash = trash.concat(notes);
+        localStorage.setItem("trash", JSON.stringify(trash));
+
         localStorage.removeItem("notes");
         showNotes();
     }
