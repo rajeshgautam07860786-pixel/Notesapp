@@ -18,8 +18,6 @@ function saveNote() {
 }
 
 
-let trash = JSON.parse(localStorage.getItem("trash")) || [];
-
 function deleteNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
